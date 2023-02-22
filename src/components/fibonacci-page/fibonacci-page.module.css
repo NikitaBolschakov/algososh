@@ -7,12 +7,15 @@
 }
 
 .list {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 1040px;
+    max-width: 944px;
+    row-gap: 48px;
+    column-gap: 16px;
     width: 100%;
     padding: 0;
-    margin: 120px auto 0;
-    gap: 16px;
+    margin: 48px auto 0;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
