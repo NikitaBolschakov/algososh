@@ -1,0 +1,17 @@
+.form {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    max-width: 522px;
+    margin: 0 auto;
+}
+
+.list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1040px;
+    width: 100%;
+    padding: 0;
+    margin: 120px auto 0;
+}
