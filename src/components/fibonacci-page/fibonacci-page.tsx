@@ -16,14 +16,8 @@ export const FibonacciPage: FC = () => {
     const string = e.currentTarget.value;
     setInputValue(string);
   }
-
-  const onClick = (e: FormEvent<HTMLFormElement> | FormEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    getFibArray();            //запустить функцию алгоритма
-    setInputValue('');        //очистить инпут
-  }
-
-  const getFibNumber = (n: number) => {
+  
+  const getNumber = (n: number) => {
     if(n < 2) return n;
     let a = 1;
     let b = 1;
@@ -33,15 +27,21 @@ export const FibonacciPage: FC = () => {
     return b;
   };
 
-  const getFibArray = async () => {
+  const getArray = async () => {
     setIsLoader(true);
     const fibArray = [];
     for(let i = 1; i <= Number(inputValue) + 1; i++) {
       await delay(SHORT_DELAY_IN_MS);
-      fibArray.push(getFibNumber(i));
+      fibArray.push(getNumber(i));
       setFibArray([...fibArray]);
     }
     setIsLoader(false);
+  }
+
+  const onClick = (e: FormEvent<HTMLFormElement> | FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    getArray();               //запустить функцию алгоритма
+    setInputValue('');        //очистить инпут
   }
 
   const maxNumber = inputValue > 0 && inputValue <= 19 ? false : true;
@@ -65,11 +65,11 @@ export const FibonacciPage: FC = () => {
         />
       </form>
       <ul className={style.list}>
-      {fibArray.map((element: number, index: number) => {
+      {fibArray.map((number: number, index: number) => {
           return  (
               <Circle
                   key={index}
-                  letter={`${element}`}
+                  letter={`${number}`}
                   index={index}
               />)
         })}
