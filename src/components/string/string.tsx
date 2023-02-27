@@ -14,12 +14,12 @@ export const StringComponent: FC = () => {
   const [nextIndex, setNextIndex] = useState<number>(0);                //кандидат на сортировку
   const [reverseArray, setReverseArray] = useState<Array<string>>([]);  //стейт массива из букв
 
-  const onChange = (e: FormEvent<HTMLInputElement>): void => {          //изменения в стейте инпута
+  const onChange = (e: FormEvent<HTMLInputElement>) => {          //изменения в стейте инпута
     const string = e.currentTarget.value;
     setInputValue(string);
   }
 
-  const reverseString = async (string: string): Promise<string[]> => {
+  const reverseString = async (string: string) => {
     const array = string.split('');          //разбить массив
     setReverseArray([...array]);             //сохранить массив в стейт
     setNextIndex(0);                         //текущий индекс на 0

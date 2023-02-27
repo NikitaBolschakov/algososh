@@ -38,8 +38,8 @@ export const SortingPage: FC = () => {
 
   //сортировка выбором
   const selectionSort = async (array: IRandomArray[], direction: boolean): Promise<IRandomArray[]> => {
-    for (let n = 0; n < array.length; n++) { //пройтись по массиву столько сколько эл-тов есть в нем
-      let max = n;
+    for (let n = 0; n < array.length; n++) {     //пройтись по массиву столько сколько эл-тов есть в нем
+      let max = n;                               //максимальное число в массиве
       array[max].state = ElementStates.Changing;
       for (let i = n + 1; i < array.length; i++) {
         array[i].state = ElementStates.Changing;
