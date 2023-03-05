@@ -7,43 +7,9 @@ import { Circle } from "../ui/circle/circle";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 import { delay } from "../../utils/utils";
 import style from "./stack-page.module.css";
- 
-interface IStackLoader {
-	add: boolean,
-	remove: boolean,
-	clear: boolean,
-	disabled: boolean
-}
-
-interface IStack<T> {
-  push: (item: T) => void;
-  pop: () => void;
-  peak: () => number;
-  getSize: () => number;
-  addStack: () => T[];
-}
-
-class Stack<T> implements IStack<T> {
-  private array: T[] = [];
-  push = (item: T): void => {
-      this.array.push(item)
-  };
-  pop = (): void => {
-      this.array.pop()
-  };
-  clear = () => {
-      this.array = [];
-  }
-  peak = (): number => {
-      return this.getSize() - 1;
-  };
-  getSize = (): number => {
-      return this.array.length;
-  }
-  addStack = (): T[] => {
-      return this.array;
-  }
-}
+import { ILoader } from "../../types/loader";
+import { IStack } from "./types";
+import { Stack } from "../../classes/stack";
 
 const stack = new Stack<string>();
 
@@ -52,7 +18,7 @@ export const StackPage: FC = () => {
   const [inputValue, setInputValue] = useState<string>('');
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [stackArray, setStackArray] = useState<string[]>([]);
-  const [isLoader, setIsLoader] = useState<IStackLoader>({
+  const [isLoader, setIsLoader] = useState<ILoader>({
     add: false,
     remove: false,
     clear: false,

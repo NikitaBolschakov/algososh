@@ -7,8 +7,9 @@ import { Direction } from "../../types/direction";
 import { Column } from "../ui/column/column";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 import style from "./sorting-page.module.css";
-import { array, asc, desc, initial, IRandomArray } from "./utils";
 import { delay, getRndInteger, swap } from "../../utils/utils";
+import { IRandomArray } from "../../types/random-array";
+import { array, asc, desc, initial } from "../../constants/sorting";
 
 export const SortingPage: FC = () => {
 

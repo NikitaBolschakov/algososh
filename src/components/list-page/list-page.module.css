@@ -1,0 +1,67 @@
+.form {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 952px;
+    width: 100%;
+    margin: 0 auto 38px;
+}
+
+.list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    max-width: 398px;
+    gap: 16px;
+    width: 100%;
+    padding: 0;
+    margin: 120px auto 0;
+}
+
+.input {
+    width: 100%;
+    max-width: 204px;
+}
+
+.buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.b_small {
+    max-width: 180px;
+    width: 100%;
+}
+
+.b_large {
+    max-width: 362px;
+    width: 100%;
+}
+
+.circle {
+    margin-right: 12px;
+}
+
+.c_small {
+    position: absolute;
+    display: flex;
+    align-items: center;
+}
+
+.item {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.addAction {
+    top: -64px;
+    left: 14px;
+}
+
+.removeAction {
+    bottom: -92px;
+    left: 10px;
+} 

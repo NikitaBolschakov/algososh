@@ -1,4 +1,4 @@
-import { IRandomArray } from './../components/sorting-page/utils';
+import { IRandomArray } from "../types/random-array";
 
 //функция задержки
 export const delay = (ms: number) => new Promise<void> (
