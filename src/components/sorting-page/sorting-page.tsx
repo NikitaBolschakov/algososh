@@ -7,23 +7,23 @@ import { Direction } from "../../types/direction";
 import { Column } from "../ui/column/column";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 import style from "./sorting-page.module.css";
-import { delay, getRndInteger, swap } from "../../utils/utils";
+import { delay } from "../../utils/utils";
 import { IRandomArray } from "../../types/random-array";
-import { array, asc, desc, initial } from "../../constants/sorting";
+import { array, asc, desc, getRndInteger, initial, MAXLEN, MAXNUM, MINLEN, MINNUM, swap } from "./utils";
 
 export const SortingPage: FC = () => {
 
-  const [isLoader, setIsLoader] = useState<string>(initial);
-  const [radioButton, setRadioButton] = useState<string>("selection-sort");
+  const [isLoader, setIsLoader] = useState(initial);
+  const [radioButton, setRadioButton] = useState("selection-sort");
   const [randomArray, setRandomArray] = useState<IRandomArray[]>([]);
 
   //cгенерировать массив при загрузке
   useEffect(() => {
-    setRandomArray(randomArr(0, 100))
+    setRandomArray(randomArr(MINNUM, MAXNUM))
   }, []);
 
   //генерирует новый массив
-  const randomArr = (min: number, max: number, minLen = 3, maxLen = 17): IRandomArray[] => {
+  const randomArr = (min: number, max: number, minLen = MINLEN, maxLen = MAXLEN): IRandomArray[] => {
     const randomNumbers: IRandomArray[] = [];
     const lengthArr = getRndInteger(minLen, maxLen);
     let i = 0;
@@ -109,7 +109,7 @@ export const SortingPage: FC = () => {
 
   //клик по кнопке - новый массив
   const onClickNewArray = () => {
-    setRandomArray(randomArr(0, 100));
+    setRandomArray(randomArr(MINNUM, MAXNUM));
   }
 
   return (

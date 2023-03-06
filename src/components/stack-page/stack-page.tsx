@@ -8,15 +8,15 @@ import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 import { delay } from "../../utils/utils";
 import style from "./stack-page.module.css";
 import { ILoader } from "../../types/loader";
-import { IStack } from "./types";
 import { Stack } from "../../classes/stack";
+import { MAXLEN, MAXSIZE } from "./utils";
 
 const stack = new Stack<string>();
 
 export const StackPage: FC = () => {
 
-  const [inputValue, setInputValue] = useState<string>('');
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [inputValue, setInputValue] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [stackArray, setStackArray] = useState<string[]>([]);
   const [isLoader, setIsLoader] = useState<ILoader>({
     add: false,
@@ -91,30 +91,30 @@ export const StackPage: FC = () => {
         <div className={style.inputs}>
           <Input
             onChange={onChange}
-            maxLength={4}
+            maxLength={MAXLEN}
             isLimitText={true}
             value={inputValue}
             extraClass="mr-6"
-            disabled={isLoader.disabled || stackArray.length > 8}
+            disabled={isLoader.disabled || stackArray.length > MAXSIZE}
           />
           <Button
             text="Добавить"
             isLoader={isLoader.add}
             onClick={() => push(inputValue)}
-            disabled={!inputValue || stackArray.length > 8 || isLoader.disabled }
+            disabled={!inputValue || stackArray.length > MAXSIZE || isLoader.disabled }
             extraClass="mr-6"
           />
           <Button
             text="Удалить"
             isLoader={isLoader.remove}
-            onClick={() => pop()}
+            onClick={pop}
             disabled={stackArray.length < 1 || isLoader.disabled}
           />
         </div>
         <Button
           text="Очистить"
           isLoader={isLoader.clear}
-          onClick={() => clear()}
+          onClick={clear}
           disabled={stackArray.length < 1 || isLoader.disabled}
         />
       </form>

@@ -8,15 +8,17 @@ import { delay } from "../../utils/utils";
 import style from "./queue-page.module.css";
 import { ILoader } from "../../types/loader";
 import { Queue } from "../../classes/queue";
+import { SHORT_DELAY_IN_MS } from "../../constants/delays";
+import { MAXLEN, SIZE } from "./utils";
 
 export const QueuePage: FC = () => {
 
-  const [queue] = useState(new Queue<string>(7)); 
-  const [inputValue, setInputValue] = useState<string>('');    
-  const [currentIndex, setCurrentIndex] = useState<number>(-1); 
+  const [queue] = useState(new Queue<string>(SIZE)); 
+  const [inputValue, setInputValue] = useState('');    
+  const [currentIndex, setCurrentIndex] = useState(-1); 
   const [queueArray, setQueueArray] = useState<(string | undefined)[]>(queue.printQueue()); 
-  const [head, setHead] = useState<number>(queue.getHead()); 
-  const [tail, setTail] = useState<number>(queue.getTail()); 
+  const [head, setHead] = useState(queue.getHead()); 
+  const [tail, setTail] = useState(queue.getTail()); 
   const [isLoader, setIsLoader] = useState<ILoader>({
     add: false,
     remove: false,
@@ -41,9 +43,9 @@ export const QueuePage: FC = () => {
     setQueueArray([...queue.printQueue()]);
     setTail(queue.getTail());
     setCurrentIndex(tail % queue.getSize());
-    await delay(500);
+    await delay(SHORT_DELAY_IN_MS);
     setCurrentIndex(-1);
-    await delay(500);
+    await delay(SHORT_DELAY_IN_MS);
 
     setIsLoader({
       ...isLoader,
@@ -63,11 +65,11 @@ export const QueuePage: FC = () => {
       queue.dequeue();
       setQueueArray([...queue.printQueue()]);
       setCurrentIndex((head & queue.getSize()));
-      await delay(500);
+      await delay(SHORT_DELAY_IN_MS);
       setHead(queue.getHead());
 
       setCurrentIndex(-1);
-      await delay(500);
+      await delay(SHORT_DELAY_IN_MS);
 
       setIsLoader({
         ...isLoader,
@@ -103,14 +105,14 @@ export const QueuePage: FC = () => {
           <Input
             disabled={isLoader.disabled}
             onChange={onChange}
-            maxLength={4}
+            maxLength={MAXLEN}
             isLimitText={true}
             value={inputValue}
             extraClass="mr-6"
           />
           <Button
             text="Добавить"
-            disabled={!inputValue || tail === 7 || isLoader.disabled}
+            disabled={!inputValue || tail === SIZE || isLoader.disabled}
             isLoader={isLoader.add}
             onClick={() => enqueue(inputValue)}
             extraClass="mr-6"

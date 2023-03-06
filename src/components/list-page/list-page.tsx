@@ -10,21 +10,14 @@ import style from "./list-page.module.css";
 import { delay } from "../../utils/utils";
 import { Button } from "../ui/button/button";
 import { IListArr, IStateLoader } from "./types";
-
-export const initialArray = ['0', '34', '8', '1'];
-export const listArr: IListArr[] = initialArray.map((item) => ({
-    value: item,
-    state: ElementStates.Default,
-    shiftElement: null
-}))
+import { initialArray, listArr, MAXINDEX, MAXLEN } from "./utils";
 
 export const ListPage: FC = () => {
-
     const list = new LinkedList<string>(initialArray);
 
-    const [inputValue, setInputValue] = useState<string>('');
-    const [inputIndex, setInputIndex] = useState<number>(1);
-    const [disabled, setDisabled] = useState<boolean>(false);
+    const [inputValue, setInputValue] = useState('');
+    const [inputIndex, setInputIndex] = useState(1);
+    const [disabled, setDisabled] = useState(false);
     const [listArray, setListArray] = useState<IListArr[]>(listArr);
     const [isLoader, setIsLoader] = useState<IStateLoader>({
         insertInBegin: false,
@@ -256,13 +249,13 @@ export const ListPage: FC = () => {
                         extraClass={style.b_small}
                         onClick={handleClickAddHead}
                         isLoader={isLoader.insertInBegin}
-                        disabled={!inputValue || disabled || listArray.length >= 9}
+                        disabled={!inputValue || disabled || listArray.length >= MAXINDEX}
                     />
                     <Button
                         text="Добавить в tail"
                         extraClass={style.b_small}
                         onClick={handleClickAddTail}
-                        disabled={!inputValue || disabled || listArray.length >= 9}
+                        disabled={!inputValue || disabled || listArray.length >= MAXINDEX}
                         isLoader={isLoader.insertAtEnd}
                     />
                     <Button
@@ -286,8 +279,8 @@ export const ListPage: FC = () => {
                     onChange={onChangeIndex}
                     isLimitText={false}
                     type="number"
-                    maxLength={1}
-                    max={9}
+                    maxLength={MAXLEN}
+                    max={MAXINDEX}
                     disabled={disabled}
                     value={inputIndex}
                     placeholder="Введите индекс"
@@ -305,7 +298,7 @@ export const ListPage: FC = () => {
                             || !inputIndex
                             || disabled
                             || inputIndex > listArray.length - 1
-                            || listArray.length >= 9
+                            || listArray.length >= MAXINDEX
                         }
                     />
                     <Button

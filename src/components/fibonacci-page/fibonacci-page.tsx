@@ -6,26 +6,17 @@ import { Circle } from "../ui/circle/circle";
 import { Input } from "../ui/input/input";
 import style from './fibonacci-page.module.css'
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
+import { getNumber, MAXLEN, MAXVALUE } from "./utils";
 
 export const FibonacciPage: FC = () => {
   const [inputValue, setInputValue] = useState<number | string>('');;       //стейт инпута
-  const [isLoader, setIsLoader] = useState<boolean>(false);                 //стейт лоадера
+  const [isLoader, setIsLoader] = useState(false);                          //стейт лоадера
   const [fibArray, setFibArray] = useState<Array<number>>([]);              //массив фибоначи
 
   const onChange = (e: FormEvent<HTMLInputElement>): void => {              //изменения в стейте инпута
     const string = e.currentTarget.value;
     setInputValue(string);
   }
-  
-  const getNumber = (n: number) => {
-    if(n < 2) return n;
-    let a = 1;
-    let b = 1;
-    for(let i = 3; i <= n; i++) {
-        [a, b] = [b, a + b];
-    }
-    return b;
-  };
 
   const getArray = async () => {
     setIsLoader(true);
@@ -44,7 +35,7 @@ export const FibonacciPage: FC = () => {
     setInputValue('');        //очистить инпут
   }
 
-  const maxNumber = inputValue > 0 && inputValue <= 19 ? false : true;
+  const maxNumber = inputValue <= 0 || inputValue > MAXVALUE;
 
   return (
     <SolutionLayout title="Последовательность Фибоначчи">
@@ -53,8 +44,8 @@ export const FibonacciPage: FC = () => {
           type="number"
           onChange={onChange}
           isLimitText={true}
-          maxLength={2}
-          max={19}
+          maxLength={MAXLEN}
+          max={MAXVALUE}
           value={inputValue}
           extraClass="mr-6" />
         <Button

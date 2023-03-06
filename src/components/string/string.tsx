@@ -1,17 +1,17 @@
 import { FC, FormEvent, useState } from "react";
 import { DELAY_IN_MS } from "../../constants/delays";
-import { ElementStates } from "../../types/element-states";
 import { delay } from "../../utils/utils";
 import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
 import { Input } from "../ui/input/input";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import style from './string.module.css'
+import { flipIndex, MAXLEN, paintingCircle } from "./utils";
 
 export const StringComponent: FC = () => {
-  const [inputValue, setInputValue] = useState<string>('');             //стейт инпута
-  const [isLoader, setIsLoader] = useState<boolean>(false);             //стейт лоадера
-  const [nextIndex, setNextIndex] = useState<number>(0);                //кандидат на сортировку
+  const [inputValue, setInputValue] = useState('');             //стейт инпута
+  const [isLoader, setIsLoader] = useState(false);              //стейт лоадера
+  const [nextIndex, setNextIndex] = useState(0);                //кандидат на сортировку
   const [reverseArray, setReverseArray] = useState<Array<string>>([]);  //стейт массива из букв
 
   const onChange = (e: FormEvent<HTMLInputElement>) => {          //изменения в стейте инпута
@@ -29,7 +29,7 @@ export const StringComponent: FC = () => {
     let left = 0;                            //левый указатель на первый эл-т
     let right = array.length - 1;            //правый на последний эл-т
     while (left <= right) {
-      [array[left], array[right]] = [array[right], array[left]]; //поменять местами значения
+      flipIndex(array, left, right);                             //поменять местами значения
       left++;                                                    //левый указатель увеличить
       right--;                                                   //правый уменьшить
       setNextIndex(left => left + 1);                            //кандидат на сортировку
@@ -47,24 +47,13 @@ export const StringComponent: FC = () => {
     setInputValue('');         //очистить инпут
   }
 
-  const paintingCircle = (index: number, nextIndex: number, arr: Array<string>) => {
-    let arrSize = arr.length - 1;
-    if (index < nextIndex || index > arrSize - nextIndex) {
-      return ElementStates.Modified
-    } else if (index === nextIndex || index === arrSize - nextIndex) {
-      return ElementStates.Changing
-    } else {
-      return ElementStates.Default
-    }
-  }
-
   return (
     <SolutionLayout title="Строка">
       <form className={style.form} onSubmit={onClick}>
         <Input
           onChange={onChange}
           isLimitText={true}
-          maxLength={11}
+          maxLength={MAXLEN}
           value={inputValue}
           extraClass="mr-6" />
         <Button
