@@ -87,7 +87,7 @@ export const StackPage: FC = () => {
 
   return (
     <SolutionLayout title="Стек">
-      <form className={style.form} onSubmit={(e) => e.preventDefault()}>
+      <form className={style.form} onSubmit={(e) => e.preventDefault()} data-cy="form">
         <div className={style.inputs}>
           <Input
             onChange={onChange}
@@ -96,6 +96,7 @@ export const StackPage: FC = () => {
             value={inputValue}
             extraClass="mr-6"
             disabled={isLoader.disabled || stackArray.length > MAXSIZE}
+            data-cy="input"
           />
           <Button
             text="Добавить"
@@ -103,12 +104,14 @@ export const StackPage: FC = () => {
             onClick={() => push(inputValue)}
             disabled={!inputValue || stackArray.length > MAXSIZE || isLoader.disabled }
             extraClass="mr-6"
+            data-cy="addButton"
           />
           <Button
             text="Удалить"
             isLoader={isLoader.remove}
             onClick={pop}
             disabled={stackArray.length < 1 || isLoader.disabled}
+            data-cy="deleteButton"
           />
         </div>
         <Button
@@ -116,6 +119,7 @@ export const StackPage: FC = () => {
           isLoader={isLoader.clear}
           onClick={clear}
           disabled={stackArray.length < 1 || isLoader.disabled}
+          data-cy="clearButton"
         />
       </form>
       <ul className={style.list}>

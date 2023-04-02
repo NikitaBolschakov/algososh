@@ -39,7 +39,7 @@ export const FibonacciPage: FC = () => {
 
   return (
     <SolutionLayout title="Последовательность Фибоначчи">
-     <form className={style.form} onSubmit={onClick}>
+     <form className={style.form} onSubmit={onClick} data-cy="form">
         <Input
           type="number"
           onChange={onChange}
@@ -47,12 +47,14 @@ export const FibonacciPage: FC = () => {
           maxLength={MAXLEN}
           max={MAXVALUE}
           value={inputValue}
-          extraClass="mr-6" />
+          extraClass="mr-6"
+          data-cy="input" />
         <Button
           text="Рассчитать"
           isLoader={isLoader}
           onClick={onClick}
           disabled={maxNumber}
+          data-cy="button"
         />
       </form>
       <ul className={style.list}>

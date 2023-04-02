@@ -49,18 +49,20 @@ export const StringComponent: FC = () => {
 
   return (
     <SolutionLayout title="Строка">
-      <form className={style.form} onSubmit={onClick}>
+      <form className={style.form} onSubmit={onClick} data-cy="form">
         <Input
           onChange={onChange}
           isLimitText={true}
           maxLength={MAXLEN}
           value={inputValue}
-          extraClass="mr-6" />
+          extraClass="mr-6"
+          data-cy="input" />
         <Button
           text="Развернуть"
           isLoader={isLoader}
           onClick={onClick}
           disabled={!inputValue}
+          data-cy="button"
         />
       </form>
       <ul className={style.list}>
