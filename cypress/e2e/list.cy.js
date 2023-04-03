@@ -18,7 +18,7 @@ import {
 
 describe("Корректная работа связного списка", () => {
   //добавить элемент в голову
-  const addHeadElem = (value) => {
+  const addInHead = (value) => {
     cy.clock();
 
     //корректная отрисовка кнопок в основной форме
@@ -69,10 +69,11 @@ describe("Корректная работа связного списка", () =
       .then((classes) => expect(classes).contains(cyChanging));
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS);
   };
 
   //добавить элемент в хвост
-  const addTailElem = (value) => {
+  const addInTail = (value) => {
     cy.clock();
 
     //корректная отрисовка кнопок в основной форме
@@ -123,10 +124,11 @@ describe("Корректная работа связного списка", () =
       .then((classes) => expect(classes).contains(cyChanging));
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS);
   };
 
   //добавить элемент по индексу
-  const addIndexElem = (value, index) => {
+  const addByIndex = (value, index) => {
     cy.clock();
 
     cy.get(cyForm).within(() => {
@@ -173,6 +175,7 @@ describe("Корректная работа связного списка", () =
       .then((classes) => expect(classes).contains(cyChanging));
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS);
   };
   
   beforeEach(() => {
@@ -217,7 +220,7 @@ describe("Корректная работа связного списка", () =
   it("Корректное добавление элемента в head", function () {
     cy.clock();
 
-    addHeadElem("6");
+    addInHead("6");
 
     //добавленный элемент стал cyModified(зеленым), остальные синие
     cy.get(cyCircle).then((item) => {
@@ -248,6 +251,7 @@ describe("Корректная работа связного списка", () =
     });
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS);
 
     //после задержки все стали cyDefault(синие)
     cy.get(cyCircle)
@@ -258,7 +262,8 @@ describe("Корректная работа связного списка", () =
   it("Корректное добавление элемента в tail", function () {
     cy.clock();
 
-    addTailElem("6");
+    addInTail("6");
+
     cy.get(cyCircle).then((item) => {
       cy.get(item[0]).children().should("have.text", "0");
       cy.get(item[0])
@@ -287,6 +292,7 @@ describe("Корректная работа связного списка", () =
     });
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS);
 
     //после задержки все стали cyDefault(синие)
     cy.get(cyCircle)
@@ -296,9 +302,10 @@ describe("Корректная работа связного списка", () =
 
   it("Корректное добавление элемента по индексу", function () {
 
-    addIndexElem("6", 2);
+    addByIndex("6", 2);
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS);
 
     cy.get(cyCircle).then((item) => {
       cy.get(item[0]).children().should("have.text", "0");
@@ -328,6 +335,7 @@ describe("Корректная работа связного списка", () =
     });
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS);
 
     cy.get(cyCircle).then((item) => {
       cy.get(item[0]).children().should("have.text", "0");
@@ -357,6 +365,7 @@ describe("Корректная работа связного списка", () =
     });
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS);
 
     cy.get(cyCircle)
       .should("have.length", 5)
@@ -399,6 +408,7 @@ describe("Корректная работа связного списка", () =
     });
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS);
 
     //проверка текста в оставшихся кнопках
     cy.get(cyCircle).then((item) => {
@@ -458,6 +468,7 @@ describe("Корректная работа связного списка", () =
     });
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS);
 
     //проверка текста в оставшихся кнопках
     cy.get(cyCircle).then((item) => {
@@ -515,6 +526,7 @@ describe("Корректная работа связного списка", () =
     });
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS);
 
     cy.get(cyCircle).then((item) => {
       cy.get(item[0]).children().should("have.text", "0");
@@ -524,6 +536,7 @@ describe("Корректная работа связного списка", () =
     });
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS);
 
     cy.get(cyCircle).then((item) => {
       cy.get(item[0]).children().should("have.text", "0");
@@ -533,6 +546,7 @@ describe("Корректная работа связного списка", () =
     });
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS);
 
     cy.get(cyCircle).then((item) => {
       cy.get(item[0]).children().should("have.text", "0");
@@ -543,6 +557,7 @@ describe("Корректная работа связного списка", () =
     });
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS);
 
     cy.get(cyCircle).then((item) => {
       cy.get(item[0]).children().should("have.text", "0");
@@ -551,6 +566,7 @@ describe("Корректная работа связного списка", () =
     });
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS);
 
     cy.get(cyCircle).then((item) => {
       cy.get(item[0]).children().should("have.text", "0");

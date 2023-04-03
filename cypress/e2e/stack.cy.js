@@ -25,6 +25,7 @@ describe("Корректная работа стека", () => {
       .then((classes) => expect(classes).contains(cyChanging)); //кружок должен быть розовый
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS);
   };
 
   const addNext = (value) => {
@@ -55,6 +56,7 @@ describe("Корректная работа стека", () => {
       .then((classes) => expect(classes).contains(cyChanging));
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS);
   };
 
   beforeEach(() => {

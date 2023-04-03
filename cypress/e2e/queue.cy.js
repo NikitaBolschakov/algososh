@@ -36,6 +36,7 @@ describe("Корректная работа очереди", () => {
       .then((classes) => expect(classes).contains(cyChanging)); //кружок должен быть розовый
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS);
   };
 
   const addNext = (value) => {
@@ -64,6 +65,7 @@ describe("Корректная работа очереди", () => {
       .then((classes) => expect(classes).contains(cyChanging));
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS);
   };
 
   beforeEach(() => {
@@ -95,6 +97,7 @@ describe("Корректная работа очереди", () => {
     cy.get(cyCircle).siblings("p").contains("0");
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS);
 
     cy.get(cyCircle)
       .invoke("attr", "class")
@@ -148,6 +151,7 @@ describe("Корректная работа очереди", () => {
       .then((classList) => expect(classList).contains(cyChanging));
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS);
 
     cy.get(cyCircle).then((item) => {
       cy.get(item[0]).children().should("be.empty");

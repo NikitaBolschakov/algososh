@@ -15,7 +15,7 @@ describe("Корректная работа страницы /fibonacci", () => 
   });
 
   it("Корректная генерация чисел фибоначчи", function () {
-    cy.clock(); //.clock - чтобы не использовать wait
+    cy.clock(); 
 
     cy.get(cyForm) //находим форму
       .within(() => {
@@ -25,6 +25,7 @@ describe("Корректная работа страницы /fibonacci", () => 
       });
 
     cy.tick(SHORT_DELAY_IN_MS); //отрабатывает короткая задержка
+    cy.wait(SHORT_DELAY_IN_MS);
 
     //во всех кружках нашли 1 ребенка, кружки имеют текст '1'
     cy.get(cyCircle)
@@ -33,6 +34,7 @@ describe("Корректная работа страницы /fibonacci", () => 
       .should("have.text", "1");
 
     cy.tick(SHORT_DELAY_IN_MS);
+    cy.wait(SHORT_DELAY_IN_MS);
 
     cy.get(cyCircle)
       .children()
@@ -40,6 +42,7 @@ describe("Корректная работа страницы /fibonacci", () => 
       .should("have.text", "11");
 
     cy.tick(SHORT_DELAY_IN_MS);
+    cy.wait(SHORT_DELAY_IN_MS);
 
     //в кружках нашли 3 ребенка, кружки имеют текст '112'
     cy.get(cyCircle)
@@ -48,6 +51,7 @@ describe("Корректная работа страницы /fibonacci", () => 
       .should("have.text", "112");
 
     cy.tick(SHORT_DELAY_IN_MS);
+    cy.wait(SHORT_DELAY_IN_MS);
 
     cy.get(cyCircle)
       .children()
@@ -55,6 +59,7 @@ describe("Корректная работа страницы /fibonacci", () => 
       .should("have.text", "1123");
 
     cy.tick(SHORT_DELAY_IN_MS);
+    cy.wait(SHORT_DELAY_IN_MS);
 
     cy.get(cyCircle)
       .children()
@@ -62,6 +67,7 @@ describe("Корректная работа страницы /fibonacci", () => 
       .should("have.text", "11235");
 
     cy.tick(SHORT_DELAY_IN_MS);
+    cy.wait(SHORT_DELAY_IN_MS);
 
     cy.get(cyCircle)
       .children()
@@ -69,6 +75,7 @@ describe("Корректная работа страницы /fibonacci", () => 
       .should("have.text", "112358");
 
     cy.tick(SHORT_DELAY_IN_MS);
+    cy.wait(SHORT_DELAY_IN_MS);
 
     cy.get(cyCircle)
       .children()
@@ -76,6 +83,7 @@ describe("Корректная работа страницы /fibonacci", () => 
       .should("have.text", "11235813");
 
     cy.tick(SHORT_DELAY_IN_MS);
+    cy.wait(SHORT_DELAY_IN_MS);
 
     cy.get(cyForm).within(() => {
       cy.get(cyButton).should("be.disabled"); //кнопка опять заблокирована

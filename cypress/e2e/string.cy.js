@@ -51,6 +51,7 @@ describe("Корректная работа строки", () => {
     });
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS)
 
     //пройтись по всем кружкам при втором рендере "dreab"
     cy.get(cyCircle).then((item) => {
@@ -81,6 +82,7 @@ describe("Корректная работа строки", () => {
     });
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS)
 
     //при третьем рендере "daerb"
     cy.get(cyCircle).then((item) => {
@@ -111,6 +113,7 @@ describe("Корректная работа строки", () => {
     });
 
     cy.tick(DELAY_IN_MS);
+    cy.wait(DELAY_IN_MS);
 
     //при четвертом рендере "daerb"
     cy.get(cyCircle).then((item) => {
@@ -118,11 +121,11 @@ describe("Корректная работа строки", () => {
         .invoke("attr", "class")
         .then((classes) => expect(classes).contains(cyModified)); //должен быть зеленый
       cy.get(item[2]).children().should("have.text", "e");
-    });
+    }); 
 
     cy.get(cyCircle)
       .invoke("attr", "class")
-      .then((classes) => expect(classes).contains(cyModified)); //еще раз проверим что все зеленые
+      .then((classes) => expect(classes).contains(cyModified));
 
     cy.get(cyForm).within(() => {
       cy.get(cyButton).should("be.disabled");   //кнопка заблокирована

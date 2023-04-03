@@ -16,7 +16,7 @@ export const cyDeleteInTail = '[data-cy="deleteInTail"]';
 export const cyAddByIndex = '[data-cy="addByIndex"]';
 export const cyDeleteByIndex = '[data-cy="deleteByIndex"]';
 
-export const cyCircle = 'div[class*="circle_circle__auj-M"]';
+export const cyCircle = 'div[class*="circle_circle"]';
 
 export const cyChanging = "circle_changing";
 export const cyDefault = "circle_default";
