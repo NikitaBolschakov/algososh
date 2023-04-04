@@ -233,7 +233,7 @@ export const ListPage: FC = () => {
 
     return (
         <SolutionLayout title="Связный список">
-            <form className={style.form} onSubmit={(e) => e.preventDefault()}>
+            <form className={style.form} onSubmit={(e) => e.preventDefault()} data-cy="form">
                 <Input
                     onChange={onChangeValue}
                     placeholder="Введите значение"
@@ -242,6 +242,7 @@ export const ListPage: FC = () => {
                     disabled={disabled}
                     value={inputValue}
                     extraClass={`${style.input} mr-6`}
+                    data-cy="input"
                 />
                 <div className={style.buttons}>
                     <Button
@@ -250,6 +251,7 @@ export const ListPage: FC = () => {
                         onClick={handleClickAddHead}
                         isLoader={isLoader.insertInBegin}
                         disabled={!inputValue || disabled || listArray.length >= MAXINDEX}
+                        data-cy="addInHead"
                     />
                     <Button
                         text="Добавить в tail"
@@ -257,6 +259,7 @@ export const ListPage: FC = () => {
                         onClick={handleClickAddTail}
                         disabled={!inputValue || disabled || listArray.length >= MAXINDEX}
                         isLoader={isLoader.insertAtEnd}
+                        data-cy="addInTail"
                     />
                     <Button
                         text="Удалить из head"
@@ -264,6 +267,7 @@ export const ListPage: FC = () => {
                         onClick={handleClickRemoveHead}
                         isLoader={isLoader.removeHead}
                         disabled={listArray.length <= 1 || disabled}
+                        data-cy="deleteInHead"
                     />
                     <Button
                         text="Удалить из tail"
@@ -271,10 +275,11 @@ export const ListPage: FC = () => {
                         onClick={handleClickRemoveTail}
                         isLoader={isLoader.removeTail}
                         disabled={listArray.length <= 1 || disabled}
+                        data-cy="deleteInTail"
                     />
                 </div>
             </form>
-            <form className={style.form} onSubmit={(e) => e.preventDefault()}>
+            <form className={style.form} onSubmit={(e) => e.preventDefault()} data-cy="formByIndex">
                 <Input
                     onChange={onChangeIndex}
                     isLimitText={false}
@@ -285,6 +290,7 @@ export const ListPage: FC = () => {
                     value={inputIndex}
                     placeholder="Введите индекс"
                     extraClass={`${style.input} mr-6`}
+                    data-cy="inputIndex"
                 />
 
                 <div className={style.buttons}>
@@ -300,6 +306,7 @@ export const ListPage: FC = () => {
                             || inputIndex > listArray.length - 1
                             || listArray.length >= MAXINDEX
                         }
+                        data-cy="addByIndex"
                     />
                     <Button
                         text="Удалить по индексу"
@@ -312,6 +319,7 @@ export const ListPage: FC = () => {
                             || inputIndex > listArray.length - 1
                             || inputIndex < 1
                         }
+                        data-cy="deleteByIndex"
                     />
                 </div>
             </form>
